@@ -1,9 +1,8 @@
 /* eslint-disable max-classes-per-file */
-/**
- * Methods isLeft() and isRight()
- * are using a typescript feature called 'type guard'
- */
 
+/**
+ * Represents a failed operation. Stores an error.
+ */
 export class Left<L, R> {
   public readonly result: L;
 
@@ -20,6 +19,9 @@ export class Left<L, R> {
   }
 }
 
+/**
+ * Represents a succeeded operation. Stores the result of the operation.
+ */
 export class Right<L, R> {
   public readonly result: R;
 

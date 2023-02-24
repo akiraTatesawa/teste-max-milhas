@@ -20,9 +20,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@root/*": [
-        "./*"
-      ],
+      // "@root/*": [
+      //   "./*"
+      // ],
       "@core/*": [
         "./src/core/*"
       ],
