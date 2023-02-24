@@ -8,7 +8,8 @@
     "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "prepare": "ts-patch install -s",
     "start": "node -r tsconfig-paths/register dist/src/infra/http/server.js",
-    "test": "jest"
+    "test": "jest",
+    "ci:test": "jest --runInBand --verbose --coverage=true"
   },
   "repository": {
     "type": "git",
