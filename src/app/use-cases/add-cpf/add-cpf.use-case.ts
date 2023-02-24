@@ -1,6 +1,7 @@
 import { AddCpfDTO } from "@app/dtos/add-cpf.dto";
 import { CpfDTO } from "@app/dtos/cpf.dto";
 import { ApplicationErrors } from "@app/errors/application-errors";
+import { CPFApplicationMapper } from "@app/mappers/cpf-mapper";
 import { CPFRepository } from "@app/ports/cpf-repository";
 import { UseCase } from "@core/app/use-case";
 import { Either, left, right } from "@core/logic/either";
@@ -45,11 +46,7 @@ export class AddCPFUseCase extends UseCase<AddCpfDTO, AddCpfUseCaseOutput> {
 
     await this._cpfRepository.create(cpfEntity);
 
-    const cpfDTO: CpfDTO = {
-      id: cpfEntity.id,
-      cpf: cpfEntity.cpf.value,
-      createdAt: cpfEntity.createdAt,
-    };
+    const cpfDTO = CPFApplicationMapper.toDTO(cpfEntity);
 
     return right(cpfDTO);
   }
