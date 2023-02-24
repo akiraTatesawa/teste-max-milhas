@@ -1,5 +1,5 @@
 {
-  "name": "teste-tecnico-max-milhas",
+  "name": "teste-max-milhas",
   "version": "1.0.0",
   "description": "API para cadastro e validação de CPFs",
   "main": "index.js",
@@ -10,8 +10,16 @@
     "start": "node -r tsconfig-paths/register dist/src/infra/http/server.js",
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akiraTatesawa/teste-max-milhas.git"
+  },
   "author": "Arthur Akira Tatesawa",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akiraTatesawa/teste-max-milhas/issues"
+  },
+  "homepage": "https://github.com/akiraTatesawa/teste-max-milhas#readme",
   "dependencies": {
     "@ngneat/falso": "^6.4.0",
     "dotenv": "^16.0.3",
