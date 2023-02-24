@@ -8,7 +8,10 @@ import { Either, left, right } from "@core/logic/either";
 import { CPF } from "@domain/cpf/cpf.entity";
 import { DomainErrors } from "@domain/errors/domain-errors";
 
-export type AddCpfUseCaseOutput = Either<DomainErrors.InvalidCpfException, CpfDTO>;
+type AddCpfUseCaseOutput = Either<
+  DomainErrors.InvalidCpfException | ApplicationErrors.ExistsCpfException,
+  CpfDTO
+>;
 
 type EnsureCPFIsUniqueOutput = Either<ApplicationErrors.ExistsCpfException, null>;
 
