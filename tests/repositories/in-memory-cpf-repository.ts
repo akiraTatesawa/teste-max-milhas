@@ -20,4 +20,8 @@ export class InMemoryCPFRepository implements CPFRepository {
 
     return existingCPF ?? null;
   }
+
+  public async findAll(): Promise<CPF[]> {
+    return this.cpfs;
+  }
 }
