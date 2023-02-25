@@ -1,7 +1,12 @@
 /* eslint-disable max-classes-per-file */
 
 /**
- * Represents a failed operation. Stores an error.
+ * Represents a failed operation.
+ *
+ * Stores an error.
+ *
+ * @class
+ * @property {any} result - an error
  */
 export class Left<L, R> {
   public readonly result: L;
@@ -20,7 +25,11 @@ export class Left<L, R> {
 }
 
 /**
- * Represents a succeeded operation. Stores the result of the operation.
+ * Represents a succeeded operation.
+ *
+ * Stores the result of the operation.
+ * @class
+ * @property {any} result - the operation result
  */
 export class Right<L, R> {
   public readonly result: R;

@@ -1,0 +1,182 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2023-02-25T20:21:57.636Z",
+    "__export_source": "insomnia.desktop.app:v2022.4.0",
+    "resources": [
+        {
+            "_id": "req_2c4710a4d00c42c5b0f2e15361992a55",
+            "parentId": "fld_eb6f72838c514eaaaea8139e61e5d85b",
+            "modified": 1677356496541,
+            "created": 1677291647439,
+            "url": "{{ _.URL }}/cpf",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"cpf\": \"73172066010\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_f71615e57b7c46718e5f767aef2e42fc"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1677293505644,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_eb6f72838c514eaaaea8139e61e5d85b",
+            "parentId": "wrk_383f120c9065457db8cf8c832d4b8c50",
+            "modified": 1677291645717,
+            "created": 1677291645717,
+            "name": "CPF",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1677291645717,
+            "_type": "request_group"
+        },
+        {
+            "_id": "wrk_383f120c9065457db8cf8c832d4b8c50",
+            "parentId": null,
+            "modified": 1677291600801,
+            "created": 1677291600801,
+            "name": "MAX MILHAS API",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_c00fe90e0e614376a1774cfc4f6a7690",
+            "parentId": "fld_eb6f72838c514eaaaea8139e61e5d85b",
+            "modified": 1677355321611,
+            "created": 1677293505594,
+            "url": "{{ _.URL }}/cpf/{% response 'body', 'req_2c4710a4d00c42c5b0f2e15361992a55', 'b64::JC5jcGY=::46b', 'no-history', 60 %}",
+            "name": "Delete",
+            "description": "",
+            "method": "DELETE",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1677293505594,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_775f5a90f6a44f1a944cfd01ab36c5f0",
+            "parentId": "fld_eb6f72838c514eaaaea8139e61e5d85b",
+            "modified": 1677356289919,
+            "created": 1677292705010,
+            "url": "{{ _.URL }}/cpf",
+            "name": "List All",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1677292705010,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_3ff5ae1406a74de2a31fc5788a16ae80",
+            "parentId": "fld_eb6f72838c514eaaaea8139e61e5d85b",
+            "modified": 1677292306147,
+            "created": 1677292219688,
+            "url": "{{ _.URL }}/cpf/{% response 'body', 'req_2c4710a4d00c42c5b0f2e15361992a55', 'b64::JC5jcGY=::46b', 'no-history', 60 %}",
+            "name": "List Unique",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [],
+            "authentication": {},
+            "metaSortKey": -1677292219688,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_d76e12dc9895a713e0cdf7e06bea6a7bb2d6086d",
+            "parentId": "wrk_383f120c9065457db8cf8c832d4b8c50",
+            "modified": 1677291604097,
+            "created": 1677291600805,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": {},
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1677291600805,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_d76e12dc9895a713e0cdf7e06bea6a7bb2d6086d",
+            "parentId": "wrk_383f120c9065457db8cf8c832d4b8c50",
+            "modified": 1677291600806,
+            "created": 1677291600806,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "spc_09910550668e41e29fd2fdd33b88b984",
+            "parentId": "wrk_383f120c9065457db8cf8c832d4b8c50",
+            "modified": 1677291600802,
+            "created": 1677291600802,
+            "fileName": "MAX MILHAS API",
+            "contents": "",
+            "contentType": "yaml",
+            "_type": "api_spec"
+        },
+        {
+            "_id": "env_06b93621603a46fca2edcf1d085357e7",
+            "parentId": "env_d76e12dc9895a713e0cdf7e06bea6a7bb2d6086d",
+            "modified": 1677342221760,
+            "created": 1677291606167,
+            "name": "development",
+            "data": {
+                "URL": "http://localhost:4000"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "URL"
+                ]
+            },
+            "color": "#5e87d9",
+            "isPrivate": false,
+            "metaSortKey": 1677291606167,
+            "_type": "environment"
+        }
+    ]
+}
