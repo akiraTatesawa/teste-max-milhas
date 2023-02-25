@@ -8,5 +8,8 @@ export class CPFRouter extends ExpressRouter {
 
     // List Unique CPF
     this.expressRouter.get("/:cpf", cpfController.listUnique);
+
+    // List All CPFs
+    this.expressRouter.get("/", cpfController.listAll);
   }
 }

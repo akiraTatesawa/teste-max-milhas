@@ -8,4 +8,8 @@ export class CPFPresenter {
       createdAt: dto.createdAt,
     };
   }
+
+  public static bulkToViewModel(dtos: CpfDTO[]): CPFViewModel[] {
+    return dtos.map((dto) => CPFPresenter.toViewModel(dto));
+  }
 }

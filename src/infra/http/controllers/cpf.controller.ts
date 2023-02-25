@@ -20,6 +20,7 @@ export class CPFController extends BaseController {
 
     this.create = this.create.bind(this);
     this.listUnique = this.listUnique.bind(this);
+    this.listAll = this.listAll.bind(this);
   }
 
   public async create(req: CreateCPFHttpRequest, res: express.Response): Promise<express.Response> {
@@ -73,7 +74,18 @@ export class CPFController extends BaseController {
     return this.ok(res, cpfViewModel);
   }
 
-  //   public async listAll(req, res: express.Response) {}
+  public async listAll(_: express.Request, res: express.Response): Promise<express.Response> {
+    const allCPFsOrError = await this.listAllCPFsUseCase.execute();
+
+    if (allCPFsOrError.isLeft()) {
+      return this.fail(res);
+    }
+
+    const cpfDTOs = allCPFsOrError.result;
+    const cpfViewModelArray = CPFPresenter.bulkToViewModel(cpfDTOs);
+
+    return this.ok(res, cpfViewModelArray);
+  }
 
   //   public async delete(req, res: express.Response) {}
 }
