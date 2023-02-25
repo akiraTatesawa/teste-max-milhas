@@ -1,0 +1,39 @@
+version: '3'
+services:
+  max-milhas-postgres-development:
+    image: postgres:13-alpine
+    container_name: max-milhas-postgres-development
+    env_file: .env.development
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - max-milhas-postgres-data:/var/lib/postgresql/data
+    command: postgres -p ${POSTGRES_PORT}
+
+  max-milhas-development:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    container_name: max-milhas-development
+    depends_on:
+      - max-milhas-postgres-development
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '5'
+    working_dir: /usr/src/
+    command: bash -c "npx prisma generate && npx prisma migrate dev && npm run dev"
+    env_file: .env.development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./src:/usr/src/src
+      - ./.env.development:/usr/src/.env.development
+      - ./tsconfig.json:/usr/src/tsconfig.json
+      - ./logs:/usr/src/logs
+    ports:
+      - ${PORT}:${PORT}
+
+volumes:
+  max-milhas-postgres-data:
