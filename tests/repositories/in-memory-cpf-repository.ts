@@ -24,4 +24,10 @@ export class InMemoryCPFRepository implements CPFRepository {
   public async findAll(): Promise<CPF[]> {
     return this.cpfs;
   }
+
+  public async delete(cpf: string): Promise<void> {
+    const indexOfCPF = this.cpfs.findIndex((persistence) => persistence.cpf.value === cpf);
+
+    this.cpfs.splice(indexOfCPF, 1);
+  }
 }
