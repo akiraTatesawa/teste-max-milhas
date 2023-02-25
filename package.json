@@ -13,7 +13,7 @@
     "dev:compose": "docker-compose -f docker-compose.development.yml --env-file .env.development",
     "dev:docker": "npm run dev:compose -- up",
     "dev:docker:build": "npm run dev:compose -- up --build",
-    "dev:docker:down": "npm run dev:compose -- down --rmi all",
+    "dev:docker:down": "npm run dev:compose -- down --rmi all -v",
     "dev:docker:seed": "docker exec -it max-milhas-development npx prisma db seed",
     "ci:test": "jest --runInBand --verbose --coverage=true"
   },
@@ -40,6 +40,7 @@
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "http-status": "^1.6.2",
+    "joi": "^17.8.3",
     "morgan": "^1.10.0",
     "node": "^19.1.0",
     "winston": "^3.8.2"

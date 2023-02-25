@@ -7,6 +7,7 @@ import { Application } from "@core/infra/http/application";
 import { ServerRouter } from "./routers/server.router";
 import { morganMiddleware } from "./middlewares/morgan.middleware";
 import { WinstonLogger } from "./logger/logger";
+import { ErrorHandler } from "./middlewares/error-handler.middleware";
 
 export class ExpressApp extends Application {
   private readonly _name: string;
@@ -34,6 +35,7 @@ export class ExpressApp extends Application {
 
     this._app.use(morganMiddleware);
     this._app.use(this._serverRouter);
+    this._app.use(ErrorHandler.handleExceptions);
   }
 
   public async init(): Promise<void> {

@@ -38,7 +38,7 @@ export class CPFValueObject extends ValueObject<CPFValueObjectProps> {
   }
 
   private static validateFormat(cpf: string): ValidationResult {
-    const cpfRegex: RegExp = /[0-9]{11}/g;
+    const cpfRegex: RegExp = /^[0-9]{11}$/g;
     if (!cpfRegex.test(cpf)) {
       return left(new DomainErrors.InvalidCpfException("Invalid CPF format"));
     }
