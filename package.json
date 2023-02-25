@@ -9,6 +9,7 @@
     "prepare": "ts-patch install -s",
     "start": "node -r tsconfig-paths/register dist/src/infra/http/server.js",
     "test": "jest",
+    "dev": "ts-node-dev --respawn --transpile-only --exit-child --ignore-watch node_modules -r tsconfig-paths/register ./src/infra/http/server.ts",
     "ci:test": "jest --runInBand --verbose --coverage=true"
   },
   "repository": {

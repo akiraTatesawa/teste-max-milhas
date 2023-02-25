@@ -37,7 +37,7 @@ export class ExpressApp extends Application {
     const { PORT } = process.env;
 
     this._app.listen(PORT || 5000, () => {
-      console.log(`[${this._name}] running on [PORT::${PORT}]`);
+      console.log(`[${this._name}] running on [PORT::${PORT || 5000}]`);
     });
   }
 }
