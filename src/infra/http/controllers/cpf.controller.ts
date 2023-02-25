@@ -6,7 +6,7 @@ import { ListUniqueCPFUseCase } from "@app/use-cases/list-unique-cpf/list-unique
 import { BaseController } from "@core/infra/http/base-controller";
 import { DomainErrors } from "@domain/errors/domain-errors";
 import { ApplicationErrors } from "@app/errors/application-errors";
-import { CreateCPFHttpRequest } from "../requests";
+import { CreateCPFHttpRequest, ListUniqueCPFHttpRequest } from "../requests";
 import { CPFPresenter } from "../presenters/cpf.presenter";
 
 export class CPFController extends BaseController {
@@ -19,6 +19,7 @@ export class CPFController extends BaseController {
     super();
 
     this.create = this.create.bind(this);
+    this.listUnique = this.listUnique.bind(this);
   }
 
   public async create(req: CreateCPFHttpRequest, res: express.Response): Promise<express.Response> {
@@ -45,7 +46,32 @@ export class CPFController extends BaseController {
     return this.created(res, cpfViewModel);
   }
 
-  //   public async listUnique(req, res: express.Response) {}
+  public async listUnique(
+    req: ListUniqueCPFHttpRequest,
+    res: express.Response
+  ): Promise<express.Response> {
+    const { cpf } = req.params;
+
+    const uniqueCpfOrError = await this.listUniqueCPFUseCase.execute({ cpf });
+
+    if (uniqueCpfOrError.isLeft()) {
+      const error = uniqueCpfOrError.result;
+
+      switch (error.constructor) {
+        case DomainErrors.InvalidCpfException:
+          return this.unprocessableEntity(res, error);
+        case ApplicationErrors.NotFoundCpfException:
+          return this.notFound(res, error);
+        default:
+          return this.fail(res, error);
+      }
+    }
+
+    const cpfDTO = uniqueCpfOrError.result;
+    const cpfViewModel = CPFPresenter.toViewModel(cpfDTO);
+
+    return this.ok(res, cpfViewModel);
+  }
 
   //   public async listAll(req, res: express.Response) {}
 

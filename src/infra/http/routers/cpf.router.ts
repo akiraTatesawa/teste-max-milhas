@@ -3,6 +3,10 @@ import { cpfController } from "../controllers";
 
 export class CPFRouter extends ExpressRouter {
   protected configRouter(): void {
+    // Create CPF
     this.expressRouter.post("/", cpfController.create);
+
+    // List Unique CPF
+    this.expressRouter.get("/:cpf", cpfController.listUnique);
   }
 }
