@@ -4,5 +4,5 @@ logs
 coverage
 
 .env
-.env.dev
+.env.development
 .env.test
