@@ -25,6 +25,10 @@ A API é responsável pela criação, listagem e remoção de CPFs.
   - [🚀 Rodando a Aplicação](#-rodando-a-aplicação)
   - [🧪 Testes Automatizados](#-testes-automatizados)
   - [🗂 Estrutura das pastas](#-estrutura-das-pastas)
+  - [💡 Escolhas e motivações](#-escolhas-e-motivações)
+    - [Arquitetura](#arquitetura)
+    - [Metodologias e Design Patterns](#metodologias-e-design-patterns)
+    - [Frameworks e Libs](#frameworks-e-libs)
 
 ## 🧰 Tecnologias Utilizadas
 
@@ -254,3 +258,74 @@ HTTP/1.1 200 OK
 | `/src/infra`      | frameworks, bibliotecas externas, interface adapters               |
 | `/src/infra/data` | repositórios, data mappers, orm, migrations, seeds                 |
 | `/src/infra/http` | controllers, middlewares, routers, presenters, view models, server |
+
+## 💡 Escolhas e motivações
+
+### Arquitetura
+
+Escolhi uma arquitetura semelhante a **Clean Architecture**. Cada camada tem a sua própria responsabilidade e o código segue a regra de dependência, ou seja, uma camada interna jamais deve depender de um trecho código presente numa camada externa. A fim de obter um bom resultado, a estratégia utilizada foi o uso de ports/adapters e inversão de dependências.
+
+- **Domain Layer:** desenvolvido utilizado padrões do **DDD (Domain-Driven Design)**, onde entidades e object values encapsulam as regras de negócio de domínio e cuidam da validação.
+
+- **Application Layer:** responsável por implementar as regras de negócio da aplicação e domínio através de use cases.
+
+- **Infra Layer:** neste projeto, é a única camada que possui dependências externas. Implementa frameworks e pacotes externos, como também é responsável pela persistência dos dados.
+
+- **Core (ou Lib):** não é necessariamente uma camada. Armazena as abstrações fundamentais da aplicação, como classes abstratas de entidades, value objects, use cases, routers, etc.
+
+### Metodologias e Design Patterns
+
+- **TDD (Test-Driven Development):** não só traz a garantia de que o código está funcionando como deveria, como também aumenta a qualidade do resultado final através do método red-green-refactor.
+   >"Usando essa metodologia, a pessoa desenvolvedora tem muito mais segurança ao realizar alterações no código e também obtém um feedback rápido caso algo não saia como o esperado em uma refatoração (...)"
+
+- **BDD (Behavior-Driven Development):** utilizando as instruções básicas sobre o projeto que me foram fornecidas pela empresa, transcrevi os cenários da aplicação para a linguagem *Gherkin* e utilizei essa transcrição para me guiar durante a testagem do software.
+    >"(...) o BDD na prática funciona como uma importante ferramenta de testagem e de início de atualização para softwares. O objetivo é melhorar as funcionalidades, escrevendo códigos que vão ao encontro das necessidades dos clientes."
+
+- **POO:** a orientação a objetos me permite criar um código mais conciso e organizado, tornando mais fácil para colocar em prática os princípios do *SOLID*.
+
+- **SOLID:** utilizando os princípios do SOLID, é possível criar um código extremamente desacoplado e altamente testável, aumentando a qualidade do software.
+
+- **Repository Pattern:** delegar a interação com o banco de dados para um repositório ao invés de realizar operações diretamente pelos use cases aumenta o descoplamento do código e obedece o princípio da responsabilidade única. Além disso, invertendo as dependências de um use case e utilizando uma abstração de repositório no construtor, torna-se possível utilizar um mesmo use case para diversos repositórios, contanto que esses obedeçam o contrato estabelecido pela abstração.
+
+    ```typescript
+      // list-unique-cpf.use-case.ts
+
+      export class ListUniqueCPFUseCase extends UseCase<ListUniqueCpfDTO, ListUniqueCPFOutput> {
+        private readonly _cpfRepository: CPFRepository;
+
+        // CPFRepository é uma interface
+        constructor(cpfRepository: CPFRepository) {
+          super();
+          this._cpfRepository = cpfRepository;
+        }
+      }
+
+      // Ambas as classes abaixo são implementações da interface CPFRepository
+      const inMemoCPFRepository = new InMemoryCPFRepository();
+      const prismaCPFRepository = new PrismaCPFRepository();
+
+      // O mesmo use case funciona tanto com o in-memory quanto com o prisma
+      const useCaseWithPrisma = new ListUniqueCPFUseCase(prismaCPFRepository)
+      const useCaseWithInMemo = new ListUniqueCPFUseCase(inMemoCPFRepository)
+    ```
+
+- **Either Monad:** Either é uma estrutura nascida da programação funcional e nesse projeto ela foi utilizada para realizar o tratamento de erros. Uma operação pode retornar um erro (Left) ou um sucesso (Right) e o Either é responsável por armazenar o valor da operação e garantir a sua tipagem estática, independentemente do resultado. Portanto, em momento algum exceções foram lançadas na aplicação utilizando `throw`, mas sim armazenadas e tratadas no controller. Através dessa abordagem, garantimos que todo retorno de um método inclui também os tipos de erro que podem ocorrem nele, aumentando a legibilidade e clareza do código.
+
+    ```typescript
+      // Lista todos os possíveis tipos de retornos:
+      // Erros: InvalidCpfException ou NotFoundCpfException
+      // Sucesso: CpfDTO
+      type ListUniqueCPFOutput = Either<
+        DomainErrors.InvalidCpfException | ApplicationErrors.NotFoundCpfException,
+        CpfDTO>
+    ```
+
+- **JSDoc:** utiliza comentários significativos para documentar classes e métodos. Utilizei o JSDoc para documentar todas as abstrações presentes na pasta `/core`, assim como as entidades de domínio e os erros de domínio e aplicação.
+
+### Frameworks e Libs
+
+- **Express:** framework para construção de web apps. Fornece uma gama de funcionalidades para lidar com requisições e respostas http. Escolhi por ser minimalista e pouco opinado, diferentemente do NestJS, assim tenho mais liberdade para utilizar design patterns, manipular erros, etc.
+
+- **PrismaORM:** ORM bastante declarativo, permite a criação de banco de dados de forma fácil e legível, além de cuidar das migrações.
+
+- **Jest + SWC:** a configuração do jest é muito simples e os testes são legíveis e facilmente interpretados. Além disso, ao adicionar o SWC como compilador, a testagem fica extremamente rápida.
