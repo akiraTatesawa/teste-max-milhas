@@ -8,13 +8,15 @@
     "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "prepare": "ts-patch install -s",
     "start": "node -r tsconfig-paths/register dist/src/infra/http/server.js",
-    "test": "jest",
     "dev": "ts-node-dev --respawn --transpile-only --exit-child --ignore-watch node_modules -r tsconfig-paths/register ./src/infra/http/server.ts",
     "dev:compose": "docker-compose -f docker-compose.development.yml --env-file .env.development",
     "dev:docker": "npm run dev:compose -- up",
     "dev:docker:build": "npm run dev:compose -- up --build",
     "dev:docker:down": "npm run dev:compose -- down --rmi all -v",
-    "dev:docker:seed": "docker exec -it max-milhas-development npx prisma db seed",
+    "test:compose": "docker-compose -f docker-compose.test.yml --env-file .env.test",
+    "test:docker": "npm run test:compose -- up --force-recreate",
+    "test:docker:down": "npm run test:compose -- down --rmi all -v",
+    "test": "jest --runInBand --verbose",
     "ci:test": "jest --runInBand --verbose --coverage=true"
   },
   "prisma": {
