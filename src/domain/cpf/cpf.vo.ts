@@ -13,7 +13,7 @@ type ValidationResult = Either<DomainErrors.InvalidCpfException, null>;
  * validations and domain businesses rules.
  *
  * This class cannot be directly instantiated.
- * Call the static method `create(cpf)` with a string CPF to create a `CPFValueObject`.
+ * Use the static method `create(cpf)` with a string CPF to create a `CPFValueObject`.
  */
 export class CPFValueObject extends ValueObject<CPFValueObjectProps> {
   private constructor(props: CPFValueObjectProps) {
