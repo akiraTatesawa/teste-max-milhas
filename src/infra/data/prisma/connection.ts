@@ -12,7 +12,7 @@ class PrismaDatabase {
   }
 
   public async cleanDb(): Promise<void> {
-    await this._prisma.$queryRaw`TRUNCATE TABLE customers CASCADE`;
+    await this._prisma.$queryRaw`TRUNCATE TABLE cpfs CASCADE`;
   }
 }
 
