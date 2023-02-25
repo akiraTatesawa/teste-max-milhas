@@ -47,4 +47,8 @@ export abstract class BaseController {
   protected unprocessableEntity(res: express.Response, error: BaseError): express.Response {
     return res.status(httpStatus.UNPROCESSABLE_ENTITY).json(this.toHttpError(error));
   }
+
+  protected fail(res: express.Response, error: BaseError): express.Response {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json(this.toHttpError(error));
+  }
 }
