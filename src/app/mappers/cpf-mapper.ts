@@ -9,4 +9,8 @@ export class CPFApplicationMapper {
       createdAt: domainCPF.createdAt,
     };
   }
+
+  public static bulkToDTO(domainCPFs: CPF[]): CpfDTO[] {
+    return domainCPFs.map((domain) => CPFApplicationMapper.toDTO(domain));
+  }
 }
