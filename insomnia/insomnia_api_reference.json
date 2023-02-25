@@ -1,13 +1,13 @@
 {
     "_type": "export",
     "__export_format": 4,
-    "__export_date": "2023-02-25T20:04:23.623Z",
+    "__export_date": "2023-02-25T20:21:57.636Z",
     "__export_source": "insomnia.desktop.app:v2022.4.0",
     "resources": [
         {
             "_id": "req_2c4710a4d00c42c5b0f2e15361992a55",
             "parentId": "fld_eb6f72838c514eaaaea8139e61e5d85b",
-            "modified": 1677355433165,
+            "modified": 1677356496541,
             "created": 1677291647439,
             "url": "{{ _.URL }}/cpf",
             "name": "Create",
@@ -84,9 +84,9 @@
         {
             "_id": "req_775f5a90f6a44f1a944cfd01ab36c5f0",
             "parentId": "fld_eb6f72838c514eaaaea8139e61e5d85b",
-            "modified": 1677355321312,
+            "modified": 1677356289919,
             "created": 1677292705010,
-            "url": "{{ _.URL }}/cpf/{% response 'body', 'req_2c4710a4d00c42c5b0f2e15361992a55', 'b64::JC5jcGY=::46b', 'no-history', 60 %}",
+            "url": "{{ _.URL }}/cpf",
             "name": "List All",
             "description": "",
             "method": "GET",
