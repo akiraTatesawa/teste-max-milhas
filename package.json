@@ -17,7 +17,8 @@
     "test:docker": "npm run test:compose -- up --build",
     "test:docker:down": "npm run test:compose -- down --rmi all -v",
     "test": "jest --runInBand --verbose",
-    "ci:test": "jest --runInBand --verbose --coverage=true"
+    "test:load-env": "dotenv -e .env.test",
+    "ci:test": "npm run test:load-env -- prisma generate && npm run test:load-env -- prisma migrate dev && npm run test:load-env -- jest --runInBand --verbose --coverage=true"
   },
   "prisma": {
     "schema": "./src/infra/data/prisma/schema.prisma",
