@@ -49,7 +49,7 @@ describe("List Unique CPF Use Case", () => {
       expect(cpfOrError.result).toHaveProperty("message", "Invalid CPF format");
     });
 
-    it("Should return an error if the cpf is invalid (e.g. does not obey the cpf rules)", async () => {
+    it("Should return an error if the cpf is invalid (e.g. does not follow the cpf rules)", async () => {
       const listUniqueInvalidCPFInput: ListUniqueCpfDTO = {
         cpf: "15067871999",
       };
