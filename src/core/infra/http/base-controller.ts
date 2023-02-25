@@ -20,14 +20,14 @@ export abstract class BaseController {
 
   protected ok<DTO>(res: express.Response, dto?: DTO): express.Response {
     if (!dto) {
-      return res.status(httpStatus.OK);
+      return res.status(httpStatus.OK).send();
     }
     return res.status(httpStatus.OK).json(dto);
   }
 
   protected created<DTO>(res: express.Response, dto?: DTO): express.Response {
     if (!dto) {
-      return res.status(httpStatus.CREATED);
+      return res.status(httpStatus.CREATED).send();
     }
     return res.status(httpStatus.CREATED).json(dto);
   }
@@ -50,7 +50,7 @@ export abstract class BaseController {
 
   protected fail(res: express.Response, error?: BaseError): express.Response {
     if (!error) {
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR);
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
     }
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json(this.toHttpError(error));
   }

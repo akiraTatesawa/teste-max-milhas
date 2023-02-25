@@ -6,7 +6,7 @@ import { ListUniqueCPFUseCase } from "@app/use-cases/list-unique-cpf/list-unique
 import { BaseController } from "@core/infra/http/base-controller";
 import { DomainErrors } from "@domain/errors/domain-errors";
 import { ApplicationErrors } from "@app/errors/application-errors";
-import { CreateCPFHttpRequest, ListUniqueCPFHttpRequest } from "../requests";
+import { CreateCPFHttpRequest, DeleteCPFHttpRequest, ListUniqueCPFHttpRequest } from "../requests";
 import { CPFPresenter } from "../presenters/cpf.presenter";
 
 export class CPFController extends BaseController {
@@ -21,6 +21,7 @@ export class CPFController extends BaseController {
     this.create = this.create.bind(this);
     this.listUnique = this.listUnique.bind(this);
     this.listAll = this.listAll.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   public async create(req: CreateCPFHttpRequest, res: express.Response): Promise<express.Response> {
@@ -87,5 +88,24 @@ export class CPFController extends BaseController {
     return this.ok(res, cpfViewModelArray);
   }
 
-  //   public async delete(req, res: express.Response) {}
+  public async delete(req: DeleteCPFHttpRequest, res: express.Response): Promise<express.Response> {
+    const { cpf } = req.params;
+
+    const deleteCPFOrError = await this.deleteCPFUseCase.execute({ cpf });
+
+    if (deleteCPFOrError.isLeft()) {
+      const error = deleteCPFOrError.result;
+
+      switch (error.constructor) {
+        case DomainErrors.InvalidCpfException:
+          return this.unprocessableEntity(res, error);
+        case ApplicationErrors.NotFoundCpfException:
+          return this.notFound(res, error);
+        default:
+          return this.fail(res, error);
+      }
+    }
+
+    return this.ok(res);
+  }
 }

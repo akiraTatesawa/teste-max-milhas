@@ -11,5 +11,8 @@ export class CPFRouter extends ExpressRouter {
 
     // List All CPFs
     this.expressRouter.get("/", cpfController.listAll);
+
+    // Delete CPF
+    this.expressRouter.delete("/:cpf", cpfController.delete);
   }
 }
