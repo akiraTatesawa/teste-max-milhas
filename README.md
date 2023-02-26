@@ -195,7 +195,7 @@ HTTP/1.1 200 OK
       cd teste-max-milhas/
     ```
 
-2. Crie um arquivo `.env.development` seguindo o exemplo descrito em `.env.sample`:
+2. Crie um arquivo `.env.development` seguindo o exemplo descrito em `.env.example`:
 
     | Nome                 | Descrição                         |
     |--------------------- |---------------------------------- |
