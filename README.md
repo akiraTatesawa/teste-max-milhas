@@ -185,6 +185,8 @@ HTTP/1.1 200 OK
 
 ## 🚀 Rodando a Aplicação
 
+- **Pré-requisitos**: docker/docker-compose, node(opcional);
+
 1. Clone e navegue até o repositório:
 
     ```bash
@@ -218,6 +220,8 @@ HTTP/1.1 200 OK
     ```
 
 ## 🧪 Testes Automatizados
+
+- **Pré-requisitos**: docker/docker-compose, node(opcional);
 
 1. Crie um arquivo `.env.test` seguindo o exemplo abaixo:
 
