@@ -45,6 +45,12 @@ A API é responsável pela criação, listagem e remoção de CPFs.
 
 ## 🧭 Referências da API
 
+Clique no botão abaixo para importar os endpoints da API.
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=MAXMILHAS%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2FakiraTatesawa%2Fteste-max-milhas%2Fmain%2Finsomnia%2Finsomnia_api_reference.json)
+
+Obs.: Alguns endpoints estão automatizados para pegar o valor do cpf retornado pela rota POST e utilizá-lo como parâmetro.
+
 ---
 
 ### Cadastro de CPF
@@ -179,6 +185,8 @@ HTTP/1.1 200 OK
 
 ## 🚀 Rodando a Aplicação
 
+- **Pré-requisitos**: docker/docker-compose, node(opcional);
+
 1. Clone e navegue até o repositório:
 
     ```bash
@@ -187,7 +195,7 @@ HTTP/1.1 200 OK
       cd teste-max-milhas/
     ```
 
-2. Crie um arquivo `.env.development` seguindo o exemplo descrito em `.env.sample`:
+2. Crie um arquivo `.env.development` seguindo o exemplo descrito em `.env.example`:
 
     | Nome                 | Descrição                         |
     |--------------------- |---------------------------------- |
@@ -201,13 +209,7 @@ HTTP/1.1 200 OK
 
     - É importante manter a variável `POSTGRES_HOST` como sendo igual a `max-milhas-postgres-development`.
 
-3. Instale as dependências do projeto:
-
-    ```bash
-      npm i
-    ```
-
-4. Rode o projeto em modo de desenvolvimento com NPM ou docker:
+3. Rode o projeto em modo de desenvolvimento com NPM ou docker:
 
     ```bash
       ## Rodando com NPM e Node
@@ -218,6 +220,8 @@ HTTP/1.1 200 OK
     ```
 
 ## 🧪 Testes Automatizados
+
+- **Pré-requisitos**: docker/docker-compose, node(opcional);
 
 1. Crie um arquivo `.env.test` seguindo o exemplo abaixo:
 
